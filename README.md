@@ -1,5 +1,5 @@
 # react-native-typescript-redux-saga-example
-This is an essential example to build react-native app using typescript and Redux Saga
+This is an essential example to build react-native app using Typescript and Redux Saga
 
 Step to run
 1. Checkou this respo
