@@ -32,6 +32,39 @@ export default interface Deal extends CommonModel {
 }
 ```
 
+Define action 
+
+```typescript 
+import IAction from './IAction'
+
+export default class AppAction {
+    public static readonly GET_DEALS: string = 'AppAction.GET_DEALS'
+    public static readonly DEALS_LOADED: string = 'AppAction.DEALS_LOADED'
+    public static readonly SHOW_DEAL_LIST: string = 'AppAction.SHOW_DEAL_LIST'
+    public static readonly SHOW_DEAL_DETAIL: string = 'AppAction.SHOW_DEAL_DETAIL'
+
+    public static getDeals = (searchTerm?: string | ''): IAction<String, void> => {
+        return {
+            payload: searchTerm,
+            type: AppAction.GET_DEALS
+        }
+    }
+
+    public static setCurrentDeal = (dealId: string): IAction<string, void> => {
+        return {
+            payload: dealId,
+            type: AppAction.SHOW_DEAL_DETAIL
+        }
+    }
+
+    public static unsetCurrentDeal = (): IAction<void, void> => {
+        return {
+            type: AppAction.SHOW_DEAL_LIST
+        }
+    }
+}
+```
+
 Define reducer 
 
 ```typescript 
@@ -99,6 +132,32 @@ export default class AppReducer {
 }
 ```
 
+Call in component 
+
+```typescript 
+interface AppProps {
+  appData: AppState
+
+  fetchDeals: () => any,
+  searchDeals: (searchStr: string) => any,
+  unsetCurrentDeal: () => any
+  setCurrentDeal: (key: string) => any
+}
+
+class App extends Component<AppProps> {
+
+  componentDidMount() {
+    this.props.fetchDeals()
+  }
+
+  currentDeal = (): UDeal => {
+    return this.props.appData.deals.find(x => x.key === this.props.appData.currentDealId)
+  }
+
+  render() {
+}
+}
+```
 
 if you see any issue, please do not hesitate to create an issue here or can contact me via email: cao.trung.thu@gmail.com or https://www.linkedin.com/in/diegothucao/
 
