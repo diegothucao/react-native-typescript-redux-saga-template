@@ -1,5 +1,5 @@
 import IAction from '../IAction'
-import Deal from '../../../model/deal/Deal';
+import Deal from '../../../model/deal/Deal'
 
 export default class DealDetailAction {
     public static readonly INITIAL_DETAIL: string = 'DealDetailAction.INITIAL_DETAIL'

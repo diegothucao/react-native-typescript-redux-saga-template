@@ -9,13 +9,11 @@ import DealDetail from './deal/DealDetail'
 import SearchBar from './deal/SearchBar'
 import AppAction from '../redux/action/AppAction'
 import AppState from '../redux/state/AppState'
-import Deal, { UDeal } from '../model/deal/Deal'
+import  { UDeal } from '../model/deal/Deal'
 
 interface AppProps {
   appData: AppState
-
-  fetchDeals: () => any,
-  searchDeals: (searchStr: string) => any,
+  searchDeals: (searchStr?: string) => any,
   unsetCurrentDeal: () => any
   setCurrentDeal: (key: string) => any
 }
@@ -23,7 +21,7 @@ interface AppProps {
 class App extends Component<AppProps> {
 
   componentDidMount() {
-    this.props.fetchDeals()
+    this.props.searchDeals()
   }
 
   currentDeal = (): UDeal => {
@@ -64,8 +62,7 @@ function mapStateToProps(state: any) {
 
 function mapDispatchToProps(dispatch: any) {
   return {
-    fetchDeals: () => dispatch(AppAction.getDeals()),
-    searchDeals: (searchStr: string) => dispatch(AppAction.getDeals(searchStr)),
+    searchDeals: (searchStr: string = "") => dispatch(AppAction.getDeals(searchStr)),
     setCurrentDeal: (key: string) => dispatch(AppAction.setCurrentDeal(key)),
     unsetCurrentDeal: () => dispatch(AppAction.unsetCurrentDeal())
   }
