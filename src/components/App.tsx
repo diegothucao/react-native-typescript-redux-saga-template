@@ -41,14 +41,11 @@ class App extends Component<AppProps> {
         </View>
       )
     }
-    const dealsToDisplay =
-      this.props.appData.deals.length > 0
-        ? this.props.appData.deals
-        : []
+
     return (
       <View style={styles.main}>
         <SearchBar searchDeals={this.props.searchDeals} searchTerm={this.props.appData.searchTerm} />
-        <DealList deals={dealsToDisplay} onItemPress={this.props.setCurrentDeal} />
+        <DealList deals={this.props.appData.deals} onItemPress={this.props.setCurrentDeal} />
       </View>
     )
   }
